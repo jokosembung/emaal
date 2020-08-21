@@ -10,6 +10,9 @@ func (s *Server) initializeRoutes() {
 	// Login Route
 	s.Router.HandleFunc("/login", middlewares.SetMiddlewareJSON(s.Login)).Methods("POST")
 
+	//kartu
+	s.Router.HandleFunc("/kartu/{user_id}/{no_kartu}", middlewares.SetMiddlewareJSON(middlewares.SetMiddlewareAuthentication(s.GetKartu))).Methods("GET")
+
 	//Users routes
 	//s.Router.HandleFunc("/users", middlewares.SetMiddlewareJSON(s.CreateUser)).Methods("POST")
 	//s.Router.HandleFunc("/users", middlewares.SetMiddlewareJSON(s.GetUsers)).Methods("GET")

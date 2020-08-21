@@ -9,8 +9,7 @@ import (
 	"github.com/jinzhu/gorm"
 
 	_ "github.com/jinzhu/gorm/dialects/postgres" //postgres database driver
-
-	"github.com/jokosembung/emaal/api/models"
+	//"github.com/jokosembung/emaal/api/models"
 )
 
 type Server struct {
@@ -33,14 +32,15 @@ func (server *Server) Initialize(Dbdriver, DbUser, DbPassword, DbPort, DbHost, D
 		}
 	}
 
-	server.DB.Debug().AutoMigrate(&models.User{}, &models.Post{}) //database migration
+	//server.DB.Debug().AutoMigrate(&models.User{}, &models.Post{}) //database migration
 
 	server.Router = mux.NewRouter()
+	server.DB.SingularTable(true)
 
 	server.initializeRoutes()
 }
 
 func (server *Server) Run(addr string) {
-	fmt.Println("Listening to port 8080")
+	fmt.Println("Listening to port 8181")
 	log.Fatal(http.ListenAndServe(addr, server.Router))
 }
